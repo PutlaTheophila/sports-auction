@@ -3,264 +3,307 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Spardha 4.0 | Pro Auction Command Center</title>
+    <title>Spardha 4.0 | Elite Auction OS</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
-        body { font-family: 'Space Grotesk', sans-serif; background: #0f172a; color: #f8fafc; }
-        .glass-card { background: rgba(30, 41, 59, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.1); }
-        .accent-border { border-left: 4px solid #3b82f6; }
-        .sport-pill { font-size: 0.65rem; padding: 2px 8px; border-radius: 99px; text-transform: uppercase; font-weight: 700; }
-        .primary-bg { background: #1e40af; }
-        .secondary-bg { background: #1e293b; border: 1px solid #3b82f6; }
-        .tertiary-bg { background: #0f172a; border: 1px solid #64748b; }
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
-        .pool-badge-A { color: #f87171; } .pool-badge-B { color: #fbbf24; }
-        .pool-badge-C { color: #60a5fa; } .pool-badge-D { color: #34d399; }
+        @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&family=JetBrains+Mono:wght@500;700&display=swap');
+        :root { --cobalt: #3b82f6; --crimson: #ef4444; --emerald: #10b981; --amber: #f59e0b; }
+        body { font-family: 'Plus Jakarta Sans', sans-serif; background: #020617; color: #f1f5f9; }
+        .mono { font-family: 'JetBrains Mono', monospace; }
+        .glass { background: rgba(15, 23, 42, 0.8); backdrop-filter: blur(20px); border: 1px solid rgba(255,255,255,0.08); }
+        .pool-A { border-left: 4px solid var(--crimson); }
+        .pool-B { border-left: 4px solid var(--amber); }
+        .pool-C { border-left: 4px solid var(--cobalt); }
+        .pool-D { border-left: 4px solid var(--emerald); }
+        .custom-scroll::-webkit-scrollbar { width: 6px; }
+        .custom-scroll::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
+        .badge { font-size: 0.65rem; padding: 2px 8px; border-radius: 4px; font-weight: 800; text-transform: uppercase; }
     </style>
 </head>
-<body class="p-4 lg:p-6">
+<body class="p-4 lg:p-8">
 
-    <nav class="flex flex-wrap justify-between items-center mb-8 gap-4">
-        <div>
-            <h1 class="text-3xl font-black tracking-tighter text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">
-                SPARDHA 4.0 <span class="text-white">PRO AUCTION</span>
-            </h1>
-            <p class="text-slate-400 text-sm font-medium uppercase tracking-widest">Advanced Team Formation Engine</p>
-        </div>
-        <div class="flex gap-4">
-            <div class="glass-card px-6 py-2 rounded-xl text-center">
-                <p class="text-[10px] text-blue-400 font-bold uppercase">Purse Left (Y)</p>
-                <p id="purse" class="text-2xl font-bold">200</p>
+    <header class="max-w-[1600px] mx-auto mb-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="lg:col-span-1 flex items-center gap-4">
+            <div class="h-14 w-14 bg-blue-600 rounded-2xl flex items-center justify-center shadow-lg shadow-blue-500/20">
+                <i class="fa-solid fa-bolt-lightning text-2xl text-white"></i>
             </div>
-            <div class="glass-card px-6 py-2 rounded-xl text-center border-emerald-500/30">
-                <p class="text-[10px] text-emerald-400 font-bold uppercase">Max Bid Allowed (X)</p>
-                <p id="max-bid" class="text-2xl font-bold">149</p>
+            <div>
+                <h1 class="text-2xl font-black tracking-tighter uppercase">Spardha 4.0</h1>
+                <p class="text-slate-500 text-[10px] font-bold tracking-widest uppercase">Rule-Validated Command Center</p>
             </div>
         </div>
-    </nav>
-
-    <div class="grid grid-cols-12 gap-6">
-        <div class="col-span-12 lg:col-span-5 space-y-6">
-            <div class="glass-card rounded-2xl p-6 h-[850px] flex flex-col">
-                <div class="flex flex-wrap justify-between items-center mb-6 gap-4">
-                    <h2 class="text-xl font-bold flex items-center gap-2">
-                        <i class="fa-solid fa-users-viewfinder text-blue-500"></i> Scouting Feed
-                    </h2>
-                    <div class="flex gap-2">
-                        <select id="poolFilter" class="bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-xs">
-                            <option value="All">All Pools</option>
-                            <option value="A">Pool A</option><option value="B">Pool B</option>
-                            <option value="C">Pool C</option><option value="D">Pool D</option>
-                        </select>
-                        <input type="text" id="search" placeholder="Search Skill/Name..." class="bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-sm focus:ring-2 focus:ring-blue-500 outline-none">
-                    </div>
+        <div class="glass p-5 rounded-3xl">
+            <p class="text-[10px] font-black text-slate-500 uppercase mb-1">Total Purse Left (Y)</p>
+            <div class="flex justify-between items-end">
+                <span id="purse" class="text-3xl font-bold mono text-blue-400">200</span>
+                <span class="text-[10px] text-slate-600 mb-1">/ 200 PTS</span>
+            </div>
+        </div>
+        <div class="glass p-5 rounded-3xl border-orange-500/30">
+            <p class="text-[10px] font-black text-slate-500 uppercase mb-1">Max Bid Limit (X)</p>
+            <div class="flex justify-between items-end">
+                <span id="max-bid" class="text-3xl font-bold mono text-orange-500">149</span>
+                <span class="text-[9px] text-slate-600 mb-1 uppercase font-bold">Rule 5 Guard</span>
+            </div>
+        </div>
+        <div class="glass p-5 rounded-3xl border-emerald-500/30">
+            <div class="flex justify-between h-full">
+                <div class="flex flex-col justify-between">
+                    <p class="text-[10px] font-black text-slate-500 uppercase">Squad</p>
+                    <span id="squad-count" class="text-2xl font-bold">0/18</span>
                 </div>
-                
-                <div class="overflow-y-auto flex-grow pr-2 custom-scroll">
-                    <div id="player-feed" class="space-y-4"></div>
+                <div class="flex flex-col justify-between text-right">
+                    <p class="text-[10px] font-black text-slate-500 uppercase">Mandatory F</p>
+                    <span id="female-count" class="text-2xl font-bold text-pink-500">0/2</span>
                 </div>
             </div>
         </div>
+    </header>
 
+    <div class="max-w-[1600px] mx-auto grid grid-cols-12 gap-6">
         <div class="col-span-12 lg:col-span-4 space-y-6">
-            <div class="glass-card rounded-2xl p-6">
-                <h2 class="text-lg font-bold mb-4 flex justify-between">
-                    <span>Squad Status</span>
-                    <span id="squad-ratio" class="text-blue-400 text-sm">0/18</span>
-                </h2>
-                <div class="space-y-4">
-                    <div class="bg-slate-800/50 p-3 rounded-lg border border-slate-700">
-                        <div class="flex justify-between text-xs mb-1">
-                            <span>Mandatory Females [Rule 2]</span>
-                            <span id="female-count" class="text-pink-400">0/2</span>
-                        </div>
-                        <div class="w-full bg-slate-900 h-2 rounded-full overflow-hidden">
-                            <div id="female-bar" class="bg-pink-500 h-full transition-all" style="width: 0%"></div>
-                        </div>
+            <div class="glass rounded-[2rem] flex flex-col h-[850px]">
+                <div class="p-6 border-b border-slate-800">
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="font-black text-sm uppercase tracking-widest flex items-center gap-2">
+                            <i class="fa-solid fa-users text-blue-500"></i> Player Pool
+                        </h2>
+                        <select id="poolSelector" class="bg-slate-900 border border-slate-700 text-[10px] rounded-lg px-2 py-1 font-bold">
+                            <option value="All">All Pools</option>
+                            <option value="A">Pool A</option>
+                            <option value="B">Pool B</option>
+                            <option value="C">Pool C</option>
+                            <option value="D">Pool D</option>
+                        </select>
                     </div>
-                    <div class="grid grid-cols-2 gap-4">
-                        <div class="p-3 bg-blue-500/10 rounded-lg border border-blue-500/20 text-center">
-                            <p class="text-[10px] uppercase text-blue-300">Utility Score</p>
-                            <p id="utility-score" class="text-xl font-bold">0.0</p>
-                        </div>
-                        <div class="p-3 bg-emerald-500/10 rounded-lg border border-emerald-500/20 text-center">
-                            <p class="text-[10px] uppercase text-emerald-300">Avg / Player</p>
-                            <p id="avg-bid" class="text-xl font-bold">11.1</p>
-                        </div>
-                    </div>
+                    <input type="text" id="playerSearch" placeholder="Search name or sport..." 
+                        class="w-full bg-slate-900/50 border border-slate-700 rounded-2xl px-5 py-3 text-sm focus:ring-2 focus:ring-blue-500 outline-none transition-all">
                 </div>
+                <div id="scouting-feed" class="overflow-y-auto flex-grow p-4 space-y-3 custom-scroll">
+                    </div>
             </div>
+        </div>
 
-            <div class="glass-card rounded-2xl p-6 overflow-hidden">
-                <h2 class="text-lg font-bold mb-4 flex items-center gap-2">
-                    <i class="fa-solid fa-layer-group text-emerald-500"></i> Tactical Roster (Multi-Sport)
+        <div class="col-span-12 lg:col-span-5 space-y-6">
+            <div class="glass rounded-[2rem] p-6 h-[850px] flex flex-col">
+                <h2 class="font-black text-sm uppercase tracking-widest mb-6 flex items-center gap-2">
+                    <i class="fa-solid fa-layer-group text-emerald-500"></i> Sectional Sport Depth
                 </h2>
-                <div id="sports-roster" class="space-y-3 h-[500px] overflow-y-auto pr-2 custom-scroll">
-                    <p class="text-slate-500 italic text-sm">No players drafted to display depth.</p>
-                </div>
+                <div id="depth-container" class="grid grid-cols-1 md:grid-cols-2 gap-4 overflow-y-auto pr-2 custom-scroll">
+                    </div>
             </div>
         </div>
 
         <div class="col-span-12 lg:col-span-3 space-y-6">
-            <div class="glass-card rounded-2xl p-6">
-                <h2 class="text-lg font-bold mb-4 text-center">Team Balance</h2>
-                <canvas id="radarChart"></canvas>
+            <div class="glass p-8 rounded-[2rem] text-center">
+                <h2 class="text-[10px] font-black uppercase text-slate-500 mb-6 tracking-widest">Team Balance Radar</h2>
+                <canvas id="balanceChart"></canvas>
             </div>
-            <div class="glass-card rounded-2xl p-6 h-[440px] flex flex-col">
-                <h2 class="text-lg font-bold mb-4 border-b border-slate-700 pb-2">Draft Log</h2>
-                <div id="draft-log" class="overflow-y-auto flex-grow custom-scroll pr-1 text-xs space-y-2"></div>
+
+            <div class="glass p-6 rounded-[2rem] flex flex-col h-[450px]">
+                <h2 class="text-xs font-black uppercase mb-4 text-slate-400">Draft History</h2>
+                <div id="draft-log" class="space-y-2 overflow-y-auto custom-scroll pr-2 text-[10px]">
+                    <p class="text-slate-600 italic text-center mt-20">Auction Pending...</p>
+                </div>
             </div>
         </div>
     </div>
 
     <script>
-        const allPlayers = [
-            { name: "Swati Yadav", pool: "A", gender: "Female", p: "Badminton", s: "Badminton", t: "Badminton" },
-            { name: "Anjali Chaudhary", pool: "A", gender: "Female", p: "Badminton", s: "Athletics", t: "None" },
-            { name: "Sunima Baral", pool: "A", gender: "Female", p: "Athletics", s: "None", t: "None" },
-            { name: "Neha Sahu", pool: "A", gender: "Female", p: "Table Tennis", s: "Chess", t: "None" },
-            { name: "Reshma Bano", pool: "A", gender: "Female", p: "Chess", s: "Athletics", t: "Badminton" },
-            { name: "Deeplata Thakery", pool: "A", gender: "Female", p: "Badminton", s: "None", t: "None" },
-            { name: "Anurag Singh", pool: "B", gender: "Male", p: "Badminton", s: "Athletics", t: "Chess" },
-            { name: "Rahul Jain", pool: "B", gender: "Male", p: "Cricket", s: "Table Tennis", t: "Volley ball" },
-            { name: "Pawan Mishra", pool: "B", gender: "Male", p: "Cricket", s: "Volley ball", t: "Badminton" },
-            { name: "Anand Baswade", pool: "B", gender: "Male", p: "Cricket", s: "Athletics", t: "Chess" },
-            { name: "Srinivas Manem", pool: "C", gender: "Male", p: "Volley ball", s: "Badminton", t: "None" },
-            { name: "Lakshmi Kanta Patra", pool: "C", gender: "Male", p: "Badminton", s: "Cricket", t: "Volley ball" },
-            { name: "Yashavant", pool: "C", gender: "Male", p: "Volley ball", s: "Cricket", t: "Chess" },
-            { name: "Nagesh D. Patil", pool: "C", gender: "Male", p: "Volley ball", s: "Table Tennis", t: "Athletics" },
-            { name: "Dhirendra Pratap Kare", pool: "C", gender: "Male", p: "Volley ball", s: "Athletics", t: "Cricket" },
-            { name: "ML Narasimha Rao", pool: "C", gender: "Male", p: "Chess", s: "None", t: "None" },
-            { name: "Pawan Academics", pool: "D", gender: "Male", p: "Cricket", s: "Volley ball", t: "Badminton" },
-            { name: "Trisharan Natthu Patil", pool: "D", gender: "Male", p: "Volley ball", s: "Cricket", t: "None" },
-            { name: "Ashish Kumar Tripathi", pool: "D", gender: "Male", p: "Cricket", s: "Badminton", t: "None" },
-            { name: "Balkrishna Mehta", pool: "D", gender: "Male", p: "Cricket", s: "None", t: "None" },
-            { name: "Arvind Yadav", pool: "D", gender: "Male", p: "Cricket", s: "Volley ball", t: "Athletics" },
-            { name: "KUNAL KUMAR WALDEKAR", pool: "D", gender: "Male", p: "Cricket", s: "Chess", t: "Athletics" },
-            { name: "Dr. Yogesh Pratap Singh", pool: "D", gender: "Male", p: "Cricket", s: "Volley ball", t: "Athletics" },
-            { name: "DEEPAK KUMAR DHIWAR", pool: "D", gender: "Male", p: "Cricket", s: "Basketball", t: "Volley ball" },
-            { name: "Minketan Pradhan", pool: "D", gender: "Male", p: "Cricket", s: "Volley ball", t: "Chess" },
-            { name: "MD MARGHOOB ENAM", pool: "D", gender: "Male", p: "Cricket", s: "Badminton", t: "Volley ball" },
-            { name: "Rajesh Kumar Mundotiya", pool: "D", gender: "Male", p: "Cricket", s: "Badminton", t: "Athletics" },
-            { name: "Dr. Vivek Raghuwanshi", pool: "D", gender: "Male", p: "Cricket", s: "Athletics", t: "Badminton" },
-            { name: "Arun Upadhyay", pool: "D", gender: "Male", p: "Cricket", s: "Badminton", t: "None" },
-            { name: "Ganesh Kolappan Geetha", pool: "D", gender: "Male", p: "Cricket", s: "None", t: "None" },
-            { name: "Ashok Kumar", pool: "D", gender: "Male", p: "Cricket", s: "Cricket", t: "Cricket" },
-            { name: "Kaushal Kumar", pool: "D", gender: "Male", p: "Cricket", s: "Volley ball", t: "Badminton" },
-            { name: "Vedant Choudhary", pool: "D", pool: "D", p: "Cricket", s: "Volley ball", t: "Table Tennis" },
-            { name: "Hemant Verma", pool: "D", gender: "Male", p: "Cricket", s: "Volley ball", t: "Basketball" },
-            { name: "RAGHVENDRA SHARMA", pool: "D", gender: "Male", p: "Cricket", s: "Table Tennis", t: "Chess" },
-            { name: "Dr Henu Kumar Verma", pool: "D", gender: "Male", p: "Cricket", s: "Badminton", t: "Table Tennis" },
-            { name: "Krishna Murari", pool: "D", gender: "Male", p: "Cricket", s: "None", t: "None" },
-            { name: "Vignesh R", pool: "D", gender: "Male", p: "Cricket", s: "None", t: "None" }
+        // COMPREHENSIVE PLAYER DATA FROM APPENDIX AND RESPONSE SHEETS 
+        const masterData = [
+            // Pool A: Elite [cite: 15]
+            { name: "Swati Yadav", pool: "A", gender: "F", p: "Badminton", s: "Badminton", t: "Badminton" },
+            { name: "Anjali Chaudhary", pool: "A", gender: "F", p: "Badminton", s: "Athletics", t: "None" },
+            { name: "Sunima Baral", pool: "A", gender: "F", p: "Athletics", s: "None", t: "None" },
+            { name: "Neha Sahu", pool: "A", gender: "F", p: "Table Tennis", s: "Chess", t: "None" },
+            { name: "Reshma Bano", pool: "A", gender: "F", p: "Chess", s: "Athletics", t: "Badminton" },
+            { name: "Deeplata Thakery", pool: "A", gender: "F", p: "Badminton", s: "None", t: "None" },
+            // Pool B [cite: 15]
+            { name: "Anurag Singh", pool: "B", gender: "M", p: "Badminton", s: "Athletics", t: "Chess" },
+            { name: "Rahul Jain", pool: "B", gender: "M", p: "Cricket", s: "Table Tennis", t: "Volley ball" },
+            { name: "Pawan Mishra", pool: "B", gender: "M", p: "Cricket", s: "Volley ball", t: "Badminton" },
+            { name: "Anand Baswade", pool: "B", gender: "M", p: "Cricket", s: "Athletics", t: "Chess" },
+            // Pool C [cite: 15]
+            { name: "Srinivas Manem", pool: "C", gender: "M", p: "Volley ball", s: "Badminton", t: "None" },
+            { name: "Lakshmi Kanta Patra", pool: "C", gender: "M", p: "Badminton", s: "Cricket", t: "Volley ball" },
+            { name: "Yashavant", pool: "C", gender: "M", p: "Volley ball", s: "Cricket", t: "Chess" },
+            { name: "Nagesh D. Patil", pool: "C", gender: "M", p: "Volley ball", s: "Table Tennis", t: "Athletics" },
+            { name: "Dhirendra Pratap Kare", pool: "C", gender: "M", p: "Volley ball", s: "Athletics", t: "Cricket" },
+            { name: "ML Narasimha Rao", pool: "C", gender: "M", p: "Chess", s: "None", t: "None" },
+            { name: "Bhaskar Ghawri", pool: "C", gender: "M", p: "Volley ball", s: "Cricket", t: "None" },
+            { name: "DEVENDRA MISHRA", pool: "C", gender: "M", p: "Badminton", s: "Cricket", t: "Athletics" },
+            // Pool D [cite: 15]
+            { name: "Pawan Academics", pool: "D", gender: "M", p: "Cricket", s: "Volley ball", t: "Badminton" },
+            { name: "Trisharan Natthu Patil", pool: "D", gender: "M", p: "Volley ball", s: "Cricket", t: "None" },
+            { name: "Ashish Kumar Tripathi", pool: "D", gender: "M", p: "Cricket", s: "Badminton", t: "None" },
+            { name: "Balkrishna Mehta", pool: "D", gender: "M", p: "Cricket", s: "None", t: "None" },
+            { name: "Arvind Yadav", pool: "D", gender: "M", p: "Cricket", s: "Volley ball", t: "Athletics" },
+            { name: "KUNAL KUMAR WALDEKAR", pool: "D", gender: "M", p: "Cricket", s: "Chess", t: "Athletics" },
+            { name: "Dr. Yogesh Pratap Singh", pool: "D", gender: "M", p: "Cricket", s: "Volley ball", t: "Athletics" },
+            { name: "DEEPAK KUMAR DHIWAR", pool: "D", gender: "M", p: "Cricket", s: "Basketball", t: "Volley ball" },
+            { name: "Minketan Pradhan", pool: "D", gender: "M", p: "Cricket", s: "Volley ball", t: "Chess" },
+            { name: "MD MARGHOOB ENAM", pool: "D", gender: "M", p: "Cricket", s: "Badminton", t: "Volley ball" },
+            { name: "Rajesh Kumar Mundotiya", pool: "D", gender: "M", p: "Cricket", s: "Badminton", t: "Athletics" },
+            { name: "Dr. Vivek Raghuwanshi", pool: "D", gender: "M", p: "Cricket", s: "Athletics", t: "Badminton" },
+            { name: "Arun Upadhyay", pool: "D", gender: "M", p: "Cricket", s: "Badminton", t: "None" },
+            { name: "Ganesh Kolappan Geetha", pool: "D", gender: "M", p: "Cricket", s: "None", t: "None" },
+            { name: "Ashok Kumar", pool: "D", gender: "M", p: "Cricket", s: "None", t: "None" },
+            { name: "Kaushal Kumar", pool: "D", gender: "M", p: "Cricket", s: "Volley ball", t: "Badminton" },
+            { name: "Vedant Choudhary", pool: "D", gender: "M", p: "Cricket", s: "Volley ball", t: "Table Tennis" },
+            { name: "Hemant Verma", pool: "D", gender: "M", p: "Cricket", s: "Volley ball", t: "None" },
+            { name: "RAGHVENDRA SHARMA", pool: "D", gender: "M", p: "Cricket", s: "Table Tennis", t: "Chess" },
+            { name: "Dr Henu Kumar Verma", pool: "D", gender: "M", p: "Cricket", s: "Badminton", t: "Table Tennis" },
+            { name: "Krishna Murari", pool: "D", gender: "M", p: "Cricket", s: "None", t: "None" },
+            { name: "Vignesh R", pool: "D", gender: "M", p: "Cricket", s: "None", t: "None" }
         ];
 
-        let state = { purse: 200, squad: [], femaleCount: 0 };
-        const sportsList = ["Cricket", "Volley ball", "Badminton", "Table Tennis", "Chess", "Athletics"];
+        let state = { purse: 200, squad: [], females: 0 };
+        const sports = ["Cricket", "Volley ball", "Badminton", "Table Tennis", "Chess", "Athletics"];
 
-        function calculate() {
+        function updateOS() {
             const z = state.squad.length;
             const y = state.purse;
+            const x = z >= 18 ? 0 : y - (17 - z) * 3; // Rule 5 implementation 
+
             document.getElementById('purse').innerText = y;
-            document.getElementById('max-bid').innerText = z >= 18 ? 0 : Math.max(0, y - (17 - z) * 3);
-            document.getElementById('squad-ratio').innerText = `${z}/18`;
-            document.getElementById('female-count').innerText = `${state.femaleCount}/2`;
-            document.getElementById('female-bar').style.width = `${Math.min(100, (state.femaleCount/2)*100)}%`;
-            document.getElementById('avg-bid').innerText = z < 18 ? (y / (18 - z)).toFixed(1) : 0;
+            document.getElementById('max-bid').innerText = x;
+            document.getElementById('squad-count').innerText = `${z}/18`;
+            document.getElementById('female-count').innerText = `${state.females}/2`;
 
-            let utility = 0;
-            state.squad.forEach(p => { 
-                utility += 1.0; // Primary 
-                if(p.s !== "None") utility += 0.6; 
-                if(p.t !== "None") utility += 0.3; 
-            });
-            document.getElementById('utility-score').innerText = utility.toFixed(1);
-
-            renderFeeds();
+            renderScouting();
+            renderDepth();
             updateChart();
         }
 
-        function renderFeeds() {
-            const feed = document.getElementById('player-feed');
-            const search = document.getElementById('search').value.toLowerCase();
-            const poolF = document.getElementById('poolFilter').value;
-            feed.innerHTML = '';
+        function renderScouting() {
+            const container = document.getElementById('scouting-feed');
+            const search = document.getElementById('playerSearch').value.toLowerCase();
+            const poolFilter = document.getElementById('poolSelector').value;
+            container.innerHTML = '';
 
-            allPlayers.filter(p => (poolF === 'All' || p.pool === poolF) && (p.name.toLowerCase().includes(search) || p.p.toLowerCase().includes(search))).forEach(p => {
-                const div = document.createElement('div');
-                div.className = "glass-card p-4 rounded-xl accent-border hover:bg-slate-800 transition";
-                div.innerHTML = `
-                    <div class="flex justify-between items-start">
-                        <div>
-                            <span class="text-[10px] font-bold pool-badge-${p.pool}">POOL ${p.pool}</span>
-                            <h3 class="font-bold text-white text-sm">${p.name} ${p.gender === 'Female' ? '🚺' : ''}</h3>
-                            <div class="flex gap-1 mt-2 flex-wrap">
-                                <span class="sport-pill primary-bg">${p.p}</span>
-                                ${p.s !== 'None' ? `<span class="sport-pill secondary-bg">${p.s}</span>` : ''}
-                                ${p.t !== 'None' ? `<span class="sport-pill tertiary-bg">${p.t}</span>` : ''}
+            masterData
+                .filter(p => (poolFilter === 'All' || p.pool === poolFilter) && (p.name.toLowerCase().includes(search) || p.p.toLowerCase().includes(search)))
+                .forEach(p => {
+                    const div = document.createElement('div');
+                    div.className = `glass p-4 rounded-2xl pool-${p.pool} hover:bg-slate-800 transition-all flex justify-between items-center`;
+                    div.innerHTML = `
+                        <div class="flex gap-4 items-center">
+                            <div class="h-10 w-10 bg-slate-900 rounded-xl border border-slate-700 flex items-center justify-center font-bold text-xs">
+                                ${p.gender}
+                            </div>
+                            <div>
+                                <h3 class="text-sm font-bold text-white">${p.name}</h3>
+                                <div class="flex gap-1 mt-1 flex-wrap">
+                                    <span class="badge bg-blue-500/10 text-blue-400 border border-blue-500/20">${p.p}</span>
+                                    ${p.s !== 'None' && p.s !== p.p ? `<span class="badge bg-slate-800 text-slate-400">${p.s}</span>` : ''}
+                                    ${p.t !== 'None' && p.t !== p.p && p.t !== p.s ? `<span class="badge bg-slate-900 text-slate-600">${p.t}</span>` : ''}
+                                </div>
                             </div>
                         </div>
-                        <button onclick="draft('${p.name}')" class="bg-blue-600 hover:bg-blue-500 text-white text-[10px] font-bold px-3 py-2 rounded-lg">DRAFT</button>
-                    </div>`;
-                feed.appendChild(div);
-            });
+                        <button onclick="draft('${p.name}')" class="bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-xl text-[10px] font-black uppercase transition-all">Bid</button>
+                    `;
+                    container.appendChild(div);
+                });
+        }
 
-            const roster = document.getElementById('sports-roster');
-            roster.innerHTML = state.squad.length ? '' : '<p class="text-slate-500 italic text-sm">No players drafted.</p>';
-            sportsList.forEach(sport => {
-                const players = state.squad.filter(p => p.p === sport || p.s === sport || p.t === sport);
-                if(players.length) {
-                    roster.innerHTML += `
-                        <div class="mb-4">
-                            <h3 class="text-[10px] font-black uppercase text-slate-500 mb-1 flex justify-between"><span>${sport}</span> <span class="text-blue-400">${players.length}</span></h3>
-                            <div class="space-y-1">${players.map(p => `
-                                <div class="text-[11px] bg-slate-800/40 p-2 rounded flex justify-between border-l-2 ${p.p === sport ? 'border-blue-500' : 'border-slate-600'}">
-                                    <span>${p.name}</span> <span class="opacity-40 italic text-[9px]">${p.p === sport ? 'Primary' : (p.s === sport ? 'Sec' : 'Tert')}</span>
-                                </div>`).join('')}</div>
-                        </div>`;
+        function renderDepth() {
+            const container = document.getElementById('depth-container');
+            container.innerHTML = '';
+            if (state.squad.length === 0) {
+                container.innerHTML = '<div class="col-span-2 text-center py-24 text-slate-700 uppercase text-[10px] tracking-widest font-black">Awaiting Squad...</div>';
+                return;
+            }
+
+            sports.forEach(sport => {
+                const members = state.squad.filter(p => p.p === sport || p.s === sport || p.t === sport);
+                if (members.length > 0) {
+                    const box = document.createElement('div');
+                    box.className = "bg-slate-900/40 border border-slate-800 p-4 rounded-3xl h-fit";
+                    box.innerHTML = `
+                        <div class="flex justify-between items-center mb-3">
+                            <h4 class="text-[10px] font-black uppercase text-slate-500 tracking-wider">${sport}</h4>
+                            <span class="text-[10px] px-2 bg-blue-500/10 text-blue-400 rounded-full font-bold">${members.length}</span>
+                        </div>
+                        <div class="space-y-1">
+                            ${members.map(m => `
+                                <div class="flex justify-between items-center p-2 bg-slate-800/40 rounded-xl border border-slate-700/30 text-[10px]">
+                                    <span class="font-bold">${m.name}</span>
+                                    <span class="italic text-[8px] opacity-40 uppercase">${m.p === sport ? 'Primary' : (m.s === sport ? 'Secondary' : 'Tertiary')}</span>
+                                </div>
+                            `).join('')}
+                        </div>
+                    `;
+                    container.appendChild(box);
                 }
             });
         }
 
         function draft(name) {
-            const idx = allPlayers.findIndex(p => p.name === name);
-            const p = allPlayers[idx];
+            const idx = masterData.findIndex(p => p.name === name);
+            const p = masterData[idx];
             const max = parseInt(document.getElementById('max-bid').innerText);
-            if(state.squad.length >= 18) return alert("Squad limit reached (18/18) [Rule 2].");
-            
-            const bid = prompt(`Winning bid for ${name}? (Rule 5 Max: ${max})`, "3");
-            const price = parseInt(bid);
-            if(price >= 3 && price <= max) {
+
+            const bidVal = prompt(`Enter winning bid for ${name} (Min: 3, Max Allowed: ${max})`, "3");
+            const price = parseInt(bidVal);
+
+            if (price >= 3 && price <= max) {
                 state.purse -= price;
                 state.squad.push({...p, price});
-                if(p.gender === 'Female') state.femaleCount++;
-                allPlayers.splice(idx, 1);
-                document.getElementById('draft-log').innerHTML = `<div class="flex justify-between py-1 border-b border-slate-800"><span>${name}</span><span class="text-blue-400 font-bold">${price} pts</span></div>` + document.getElementById('draft-log').innerHTML;
-                calculate();
-            } else alert("Invalid bid. Min 3 pts, Max " + max + " pts.");
+                if (p.gender === 'F') state.females++;
+                masterData.splice(idx, 1);
+                
+                const log = document.getElementById('draft-log');
+                if (state.squad.length === 1) log.innerHTML = '';
+                log.innerHTML = `
+                    <div class="flex justify-between items-center p-3 bg-slate-900/50 rounded-2xl border border-slate-800 mb-2">
+                        <span class="font-bold uppercase">${name} (${p.pool})</span>
+                        <span class="text-blue-400 mono font-bold">${price} PTS</span>
+                    </div>` + log.innerHTML;
+                
+                updateOS();
+            } else {
+                alert(`Invalid Bid. Rule 5 protects your remaining 18-player budget. Max allowed bid is ${max}.`);
+            }
         }
 
-        const radar = new Chart(document.getElementById('radarChart'), {
+        const chart = new Chart(document.getElementById('balanceChart'), {
             type: 'radar',
-            data: { labels: sportsList, datasets: [{ data: [0,0,0,0,0,0], backgroundColor: 'rgba(59, 130, 246, 0.2)', borderColor: '#3b82f6', pointRadius: 0 }] },
-            options: { scales: { r: { grid: { color: '#334155' }, ticks: { display: false }, suggestMin: 0, suggestMax: 6 } }, plugins: { legend: false } }
+            data: {
+                labels: sports,
+                datasets: [{
+                    label: 'Team Coverage',
+                    data: [0,0,0,0,0,0],
+                    backgroundColor: 'rgba(59, 130, 246, 0.15)',
+                    borderColor: '#3b82f6',
+                    borderWidth: 2,
+                    pointRadius: 0
+                }]
+            },
+            options: {
+                scales: { r: { grid: { color: '#1e293b' }, angleLines: { color: '#1e293b' }, ticks: { display: false }, suggestMin: 0, suggestMax: 5 } },
+                plugins: { legend: { display: false } }
+            }
         });
 
         function updateChart() {
-            radar.data.datasets[0].data = sportsList.map(s => {
+            chart.data.datasets[0].data = sports.map(s => {
                 let score = 0;
-                state.squad.forEach(p => { if(p.p===s) score+=1; if(p.s===s) score+=0.5; if(p.t===s) score+=0.2; });
+                state.squad.forEach(p => {
+                    if (p.p === s) score += 1.0;
+                    if (p.s === s) score += 0.5;
+                    if (p.t === s) score += 0.25;
+                });
                 return score;
             });
-            radar.update();
+            chart.update();
         }
 
-        ['search', 'poolFilter'].forEach(id => document.getElementById(id).addEventListener('input', renderFeeds));
-        calculate();
+        document.getElementById('playerSearch').addEventListener('input', renderScouting);
+        document.getElementById('poolSelector').addEventListener('change', renderScouting);
+        updateOS();
     </script>
 </body>
 </html>
